@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +7,18 @@ using UnityEngine;
 
 public class LaserBeam
 {
-    #region Private Variables
     public GameObject laserObject;
     private LineRenderer _laser;
     private List<Vector3> _laserIndices = new List<Vector3>();
-    #endregion
+    private Vector3 startPosition;
+    private Vector3 startDirection;
 
-    public LaserBeam(Vector3 position, Vector3 direction, float startWidth, float endWidth, Color startColor, Color endColor, Material material)
+    public LaserBeam(GameObject parent, Vector3 position, Vector3 direction, float startWidth, float endWidth, Color startColor, Color endColor, Material material)
     {
         _laser = new LineRenderer();
         laserObject = new GameObject();
         laserObject.name = "Laser Beam";
+        laserObject.transform.parent = parent.transform;
 
         _laser = this.laserObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
         _laser.startWidth = startWidth;
@@ -26,11 +26,16 @@ public class LaserBeam
         _laser.startColor = startColor;
         _laser.endColor = endColor;
         _laser.material = material;
+        _laser.receiveShadows = false;
+        _laser.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
+        startPosition = position;
+        startDirection = direction;
 
         CastLaser(position, direction);
     }
 
-    private void CastLaser(position, direction)
+    private void CastLaser(Vector3 position, Vector3 direction)
     {
         _laserIndices.Add(position);
 
@@ -56,7 +61,8 @@ public class LaserBeam
             Vector3 dir = Vector3.Reflect(direction, hit.normal);
 
             CastLaser(pos, dir);
-        } else
+        }
+        else
         {
             _laserIndices.Add(hit.point);
             UpdateLaser();
@@ -68,9 +74,16 @@ public class LaserBeam
         int count = 0;
         _laser.positionCount = _laserIndices.Count;
         
-        foreach (Vector 3 index in _laserIndices) {
+        foreach (Vector3 index in _laserIndices) {
             _laser.SetPosition(count, index);
             count++;
         }
+    }
+
+    public void UpdateRays()
+    {
+        Debug.Log("UPDATE!");
+        _laserIndices = new List<Vector3>();
+        CastLaser(startPosition, startDirection);
     }
 }

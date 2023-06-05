@@ -5,7 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public Material material;
-    public float beamSizeFactor;
+    public float beamSizeFactor = 3;
     private MeshRenderer renderer;
     private LaserBeam laserBeam;
 
@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
     {
         renderer = GetComponent<MeshRenderer>();
         float width = renderer.bounds.size.x / beamSizeFactor;
-        laserBeam = new LaserBeam(gameObject, transform.position, transform.forward, width, width, Color.red, Color.red, material);
+        laserBeam = new LaserBeam(gameObject, width, width, Color.red, Color.red, material);
     }
 
     // Update is called once per frame

@@ -7,95 +7,82 @@ using UnityEngine;
 
 public class LaserBeam
 {
-    public GameObject laserObject;
-    private LineRenderer _laser;
-    private List<Vector3> _laserIndices = new();
-    private Vector3 startPosition;
-    private Vector3 startDirection;
     private float laserWidth;
+    private Vector3 laserStartPosition;
+    private Vector3 laserStartDirection;
+    private List<float> waveLengths;
+    private List<Vector3> laserIndices;
+    private List<GameObject> cylinders;
 
-    private List<GameObject> cylinderObjects = new();
-    private GameObject laserParent;
-
-    public LaserBeam(GameObject parent, float startWidth, float endWidth, Color startColor, Color endColor, Material material)
+    public LaserBeam(List<float> waveLengths, float laserWidth, Vector3 laserStartPosition, Vector3 laserStartDirection)
     {
-        _laser = new LineRenderer();
-        laserObject = new GameObject();
-        laserObject.name = "Laser Beam";
-        laserObject.transform.parent = parent.transform;
+        this.waveLengths = waveLengths;
+        this.laserWidth = laserWidth;
+        this.laserStartDirection = laserStartDirection;
+        this.laserStartPosition = laserStartPosition;
 
-        _laser = this.laserObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
-        _laser.startWidth = startWidth;
-        _laser.endWidth = endWidth;
-        _laser.startColor = startColor;
-        _laser.endColor = endColor;
-        _laser.material = material;
-        _laser.receiveShadows = false;
-        _laser.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-
-        laserWidth = startWidth;
-
-        startPosition = parent.transform.position;
-        startDirection = parent.transform.forward;
-
-        laserParent = parent;
-
-        CastLaser(startPosition, startDirection);
+        this.laserIndices = new List<Vector3>();
+        this.cylinders = new List<GameObject>();
+        
+        CastLaser(this.laserIndices, this.laserStartPosition, this.laserStartDirection);
     }
 
-    private void CastLaser(Vector3 position, Vector3 direction)
+    private void CastLaser(List<Vector3> indices, Vector3 position, Vector3 direction)
     {
-        _laserIndices.Add(position);
+        indices.Add(position);
 
         Ray ray = new Ray(position, direction);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100, 1))
         {
-            CheckHit(hit, direction);
+            CheckHit(indices, hit, direction);
         }
         else
         {
-            _laserIndices.Add(ray.GetPoint(199));
-            UpdateLaser();
+            indices.Add(ray.GetPoint(200));
+            DrawLaser();
         }
     }
 
-    private void CheckHit(RaycastHit hit, Vector3 direction)
+    private void CheckHit(List<Vector3> indices, RaycastHit hit, Vector3 direction)
     {
-        if (hit.collider.tag.Equals("Mirror"))
+        Debug.Log(hit.point);
+        if (hit.collider.CompareTag("Mirror"))
         {
             Vector3 pos = hit.point;
             Vector3 dir = Vector3.Reflect(direction, hit.normal);
 
-            CastLaser(pos, dir);
+            CastLaser(indices, pos, dir);
         }
         else
         {
-            _laserIndices.Add(hit.point);
-            UpdateLaser();
+            indices.Add(hit.point);
+            DrawLaser();
         }
     }
 
-    private void UpdateLaser()
+    private void DrawLaser()
     {
-        int count = 0;
-        _laser.positionCount = _laserIndices.Count;
-        
-        foreach (Vector3 index in _laserIndices) {
-            _laser.SetPosition(count, index);
-            count++;
-        }
-        for (int i = 0; i < _laserIndices.Count - 1; i++)
+        for (int i = 0; i < this.laserIndices.Count - 1; i++)
         {
-            cylinderObjects.Add(buildCylinder(_laserIndices[i], _laserIndices[i + 1], laserWidth));
+            this.cylinders.Add(BuildCylinder(laserIndices[i], laserIndices[i + 1]));
         }
     }
 
-    private GameObject buildCylinder(Vector3 startPoint, Vector3 endPoint, float width)
+    private GameObject BuildCylinder(Vector3 startPoint, Vector3 endPoint)
     {
         Vector3 deltaVector = endPoint - startPoint;
         GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+
+        float realSizeX = cylinder.GetComponent<Renderer>().bounds.size.x;
+        float realSizeZ = cylinder.GetComponent<Renderer>().bounds.size.z;
+
+        Vector3 scale = cylinder.transform.localScale;
+        scale.y = deltaVector.magnitude / 2f;
+        scale.x = this.laserWidth * scale.x / realSizeX;
+        scale.z = this.laserWidth * scale.z / realSizeZ;
+        cylinder.transform.localScale = scale;
 
         cylinder.name = "Beam";
         cylinder.transform.position = (startPoint + endPoint) / 2f;
@@ -105,65 +92,65 @@ public class LaserBeam
         meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         meshRenderer.receiveShadows = false;
 
-        float realSizeX = cylinder.GetComponent<Renderer>().bounds.size.x;
-        float realSizeZ = cylinder.GetComponent <Renderer>().bounds.size.z;
-
-        Vector3 scale = cylinder.transform.localScale;
-        scale.y = deltaVector.magnitude / 2f;
-        scale.x = width * scale.x / realSizeX;
-        scale.z = width * scale.z / realSizeZ;
-        Debug.Log(scale);
-        cylinder.transform.localScale = scale;
         return cylinder;
     }
 
-    public bool CheckPath()
+    public void UpdateLaser()
     {
-        if (_laserIndices.Count < 2)
+        if (CheckPath())
         {
-            Ray ray = new Ray(startPosition, startDirection);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, 1)) {
-                return true;
-            }
-        } 
-        else
+            this.cylinders.ForEach(obj => Object.Destroy(obj));
+            this.laserIndices.Clear();
+            CastLaser(this.laserIndices, this.laserStartPosition, this.laserStartDirection);
+        }
+    }
+
+    private bool CheckPath()
+    {
+        for (int i = 0; i < this.laserIndices.Count - 1; i++)
         {
-            for (int i = 0; i < _laserIndices.Count - 1; i++)
+            Vector3 firstPoint = laserIndices[i];
+            Vector3 secondPoint = laserIndices[i + 1];
+
+            Ray ray = new Ray(firstPoint, secondPoint - firstPoint);
+            RaycastHit hit = new RaycastHit();
+            Debug.DrawRay(firstPoint, secondPoint - firstPoint, Color.cyan);
+
+            if (Physics.Raycast(ray, out hit, Vector3.Distance(firstPoint, secondPoint), 1))
             {
-                Vector3 firstPoint = _laserIndices[i];
-                Vector3 secondPoint = _laserIndices[i + 1];
-
-                Vector3 vector = secondPoint - firstPoint;
-
-                Ray ray = new Ray(firstPoint, vector);
-                RaycastHit hit;
-                if (Physics.Raycast(ray,out hit, 100, 1))
+                if (!hit.collider.gameObject.CompareTag("LaserBeam"))
                 {
-                    if (!_laserIndices.Contains(hit.point) && !hit.collider.gameObject.CompareTag("LaserBeam"))
-                    {
-                        Debug.Log("HIT");
-                        return true;
-                    }
+                    return true;
                 }
-                else
+            }
+            if (Physics.Raycast(ray, out hit, 100, 1))
+            {
+                if (!hit.collider.gameObject.CompareTag("LaserBeam"))
                 {
                     return true;
                 }
             }
         }
-        return false;
-    }
 
-    public void UpdateRays()
-    {
-        startPosition = laserParent.transform.position;
-        startDirection = laserParent.transform.forward;
-        if (CheckPath())
+        /*List<Vector3> newPath = new List<Vector3>();
+        CastLaser(newPath, this.laserStartPosition, this.laserStartDirection);
+
+        foreach (Vector3 point in newPath)
         {
-            cylinderObjects.ForEach(obj => Object.Destroy(obj));
-            _laserIndices.Clear();
-            CastLaser(startPosition, startDirection);
+            if (!this.laserIndices.Contains(point))
+            {
+                return true;
+            }
         }
+
+        foreach (Vector3 point in this.laserIndices)
+        {
+            if (!newPath.Contains(point))
+            {
+                return true;
+            }
+        }*/
+
+        return false;
     }
 }

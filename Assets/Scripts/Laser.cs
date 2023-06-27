@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        beam = new LaserBeam(gameObject, laserMaterial);
+        beam = new LaserBeam(gameObject, laserMaterial, 700f);
     }
 
     // Update is called once per frame

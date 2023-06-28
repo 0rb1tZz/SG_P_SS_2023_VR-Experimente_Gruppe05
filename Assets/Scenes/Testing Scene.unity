@@ -354,8 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df5dac424840cb45bf25c8649a4515f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 3f9336a53d1d2ea43895699cc52cb411, type: 2}
-  beamSizeFactor: 3
+  laserMaterial: {fileID: 0}
 --- !u!65 &1298995805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -427,7 +426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298995803}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.359, y: 0.83104575, z: -8.025}
+  m_LocalPosition: {x: -0.359, y: 0.7236, z: -8.025}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,10 +9,12 @@ public class LaserBeam
     LineRenderer laser;
     List<Vector3> laserIndices = new List<Vector3>();
     GameObject parentObject;
+    float laserWavenlength;
 
     public LaserBeam(GameObject parentObject, Material material, float wavelength)
     {
         this.parentObject = parentObject;
+        this.laserWavenlength = wavelength;
 
         this.laser = new LineRenderer();
         this.laserObject = new GameObject();
@@ -54,6 +56,17 @@ public class LaserBeam
             Vector3 direction = Vector3.Reflect(dir, hitInfo.normal);
 
             CastRay(position, direction);
+        }
+        else if (hitInfo.collider.gameObject.tag == "LaserDetector")
+        {
+            LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
+            if (detector != null && detector.acceptedWavelength == this.laserWavenlength)
+            {
+                hitInfo.transform.SendMessage("HitByLaser");
+            }
+
+            laserIndices.Add(hitInfo.point);
+            UpdateLineRenderer();
         }
         else if (hitInfo.collider.gameObject.tag != "Mirror")
         {

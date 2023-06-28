@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LaserBeam
 {
@@ -50,14 +51,19 @@ public class LaserBeam
 
     void CheckHit(RaycastHit hitInfo, Vector3 dir)
     {
-        if (hitInfo.collider.gameObject.tag == "Mirror")
+        string tag = hitInfo.collider.tag;
+        if (tag == "Mirror")
         {
             Vector3 position = hitInfo.point;
             Vector3 direction = Vector3.Reflect(dir, hitInfo.normal);
 
             CastRay(position, direction);
         }
-        else if (hitInfo.collider.gameObject.tag == "LaserDetector")
+        else if (tag == "Prism")
+        {
+            HandlePrism(hitInfo, dir);
+        }
+        else if (tag == "LaserDetector")
         {
             LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
             if (detector != null && detector.acceptedWavelength == this.laserWavenlength)
@@ -68,14 +74,10 @@ public class LaserBeam
             laserIndices.Add(hitInfo.point);
             UpdateLineRenderer();
         }
-        else if (hitInfo.collider.gameObject.tag != "Mirror")
+        else
         {
             laserIndices.Add(hitInfo.point);
             UpdateLineRenderer();
-        }
-        else
-        {
-            CastRay(hitInfo.point, dir);
         }
     }
 
@@ -171,6 +173,37 @@ public class LaserBeam
         float realBlue = blue == 0f ? 0f : Mathf.Pow(blue * factor, 0.8f);
 
         return new Color(realRed, realGreen, realBlue, 1f);
+    }
+
+    void HandlePrism(RaycastHit hitInfo, Vector3 dir)
+    {
+        float n1 = 1.000293f;
+        float n2 = 1.52f;
+
+        laserIndices.Add(hitInfo.point);
+
+        Vector3 refractedRay = RefractRay(n1, n2, hitInfo.normal, dir);
+        Ray ray = new Ray(hitInfo.point, refractedRay);
+        RaycastHit hit = new RaycastHit();
+
+        if (Physics.Raycast(ray, out hit, 100) && hit.collider.gameObject.tag == "Prism")
+        {
+            laserIndices.Add(hit.point);
+            Vector3 refractedRay2 = RefractRay(n2, n1, hit.normal, refractedRay);
+            CastRay(hit.point + refractedRay2 * 0.1f, refractedRay2);
+        } else
+        {
+            Debug.DrawRay(hitInfo.point, refractedRay);
+        }
+    }
+
+    Vector3 RefractRay(float n1, float n2, Vector3 norm, Vector3 dir)
+    {
+        dir.Normalize();
+
+        Vector3 refractedVector = (n1 / n2 * Vector3.Cross(norm, Vector3.Cross(-norm, dir)) - norm * Mathf.Sqrt(1 - Vector3.Dot(Vector3.Cross(norm, dir) * (n1 / n2 * n1 / n2), Vector3.Cross(norm, dir)))).normalized;
+
+        return refractedVector;
     }
 
 }

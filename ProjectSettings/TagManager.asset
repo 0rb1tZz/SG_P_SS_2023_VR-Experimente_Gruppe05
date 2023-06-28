@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Left Hand
+  - Right Hand
   - LaserBeam
   - Mirror
   layers:
@@ -13,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Interactable
   - 
   - 
   - 

@@ -9,7 +9,7 @@ TagManager:
   - Mirror
   - LaserDetector
   - Prism
-  - LaserPassthrough
+  - LaserCheckpoint
   layers:
   - Default
   - TransparentFX

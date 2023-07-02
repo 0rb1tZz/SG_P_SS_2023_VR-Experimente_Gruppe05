@@ -11,7 +11,10 @@ public class LaserDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Color color = LaserHelperFunctions.RgbFromWavelength(acceptedWavelength);
+
+        Material material = gameObject.GetComponent<Renderer>().material;
+        material.color = color;
     }
 
     // Update is called once per frame

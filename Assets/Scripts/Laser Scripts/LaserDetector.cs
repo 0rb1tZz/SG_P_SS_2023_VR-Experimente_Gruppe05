@@ -26,9 +26,6 @@ public class LaserDetector : MonoBehaviour
     void HitByLaser()
     {
         Debug.Log("HIT BY LASER!");
-        if (level == 1)
-        {
-            LevelManager.FinishFirstLevel();
-        }
+        LevelManager.FinishLevel(level);
     }
 }

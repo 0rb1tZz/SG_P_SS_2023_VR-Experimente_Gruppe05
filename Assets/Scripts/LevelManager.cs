@@ -16,12 +16,23 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public static void FinishFirstLevel()
+    public static void FinishLevel(int level)
     {
-        GameObject door = GameObject.Find("Door_Lvl_2");
-        if (door != null)
+        if (level == 1)
         {
-            door.SetActive(false);
+            GameObject door = GameObject.Find("Door_Lvl_2");
+            if (door != null)
+            {
+                door.SetActive(false);
+            }
+        }
+        else if (level == 2)
+        {
+            GameObject door = GameObject.Find("Door_Lvl_3");
+            if (door != null)
+            {
+                door.SetActive(false);
+            }
         }
     }
 }

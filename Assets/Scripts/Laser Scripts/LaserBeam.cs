@@ -62,6 +62,10 @@ public class LaserBeam
 
             CastRay(position, direction);
         }
+        else if (tag == "Lens")
+        {
+            HandleLens(hitInfo, dir);
+        }
         else if (tag == "Prism")
         {
             HandlePrism(hitInfo, dir);
@@ -115,6 +119,38 @@ public class LaserBeam
         this.laserIndices.Clear();
         this.checkpointList.Clear();
         CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
+    }
+
+    void HandleLens(RaycastHit hitInfo, Vector3 dir)
+    {
+        laserIndices.Add(hitInfo.point);
+        GameObject lens = hitInfo.collider.gameObject;
+
+        float focalLength = lens.GetComponent<Lens>().focalLength;
+        Vector3 focalLengthVector = new Vector3(focalLength, 0, 0);
+
+
+        focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.right, 2*Mathf.PI, 0);
+
+        if(Vector3.Dot(dir, focalLengthVector) < 0){
+            focalLengthVector *= -1;
+        }
+
+        if(!lens.GetComponent<Lens>().isConvex){
+            focalLengthVector *= -1;
+        }
+
+        Vector3 focalPoint = lens.transform.position + focalLengthVector;
+        Vector3 newDirection;
+
+        if(lens.GetComponent<Lens>().isConvex){
+            newDirection = focalPoint - hitInfo.point;
+        }else{
+            newDirection = hitInfo.point - focalPoint;
+        }
+        
+
+        CastRay(hitInfo.point + newDirection * 0.05f, newDirection);
     }
 
     void HandlePrism(RaycastHit hitInfo, Vector3 dir)

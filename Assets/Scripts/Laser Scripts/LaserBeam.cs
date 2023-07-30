@@ -129,8 +129,12 @@ public class LaserBeam
         float focalLength = lens.GetComponent<Lens>().focalLength;
         Vector3 focalLengthVector = new Vector3(focalLength, 0, 0);
 
-
-        focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.right, 2*Mathf.PI, 0);
+        if(lens.GetComponent<Lens>().isConvex){
+            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.right, 2*Mathf.PI, 0);
+        }else{
+            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.up, 2*Mathf.PI, 0);
+        }
+        
 
         if(Vector3.Dot(dir, focalLengthVector) < 0){
             focalLengthVector *= -1;

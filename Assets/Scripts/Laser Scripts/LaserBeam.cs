@@ -129,30 +129,38 @@ public class LaserBeam
         float focalLength = lens.GetComponent<Lens>().focalLength;
         Vector3 focalLengthVector = new Vector3(focalLength, 0, 0);
 
-        if(lens.GetComponent<Lens>().isConvex){
-            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.right, 2*Mathf.PI, 0);
-        }else{
-            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.up, 2*Mathf.PI, 0);
+        if (lens.GetComponent<Lens>().isConvex)
+        {
+            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.right, 2 * Mathf.PI, 0);
         }
-        
+        else
+        {
+            focalLengthVector = Vector3.RotateTowards(focalLengthVector, lens.transform.up, 2 * Mathf.PI, 0);
+        }
 
-        if(Vector3.Dot(dir, focalLengthVector) < 0){
+
+        if (Vector3.Dot(dir, focalLengthVector) < 0)
+        {
             focalLengthVector *= -1;
         }
 
-        if(!lens.GetComponent<Lens>().isConvex){
+        if (!lens.GetComponent<Lens>().isConvex)
+        {
             focalLengthVector *= -1;
         }
 
         Vector3 focalPoint = lens.transform.position + focalLengthVector;
         Vector3 newDirection;
 
-        if(lens.GetComponent<Lens>().isConvex){
+        if (lens.GetComponent<Lens>().isConvex)
+        {
             newDirection = focalPoint - hitInfo.point;
-        }else{
+        }
+        else
+        {
             newDirection = hitInfo.point - focalPoint;
         }
-        
+
 
         CastRay(hitInfo.point + newDirection * 0.05f, newDirection);
     }
@@ -173,7 +181,8 @@ public class LaserBeam
             laserIndices.Add(hit.point);
             Vector3 refractedRay2 = RefractRay(n2, n1, hit.normal, refractedRay);
             CastRay(hit.point + refractedRay2 * 0.1f, refractedRay2);
-        } else
+        }
+        else
         {
             Debug.DrawRay(hitInfo.point, refractedRay);
         }

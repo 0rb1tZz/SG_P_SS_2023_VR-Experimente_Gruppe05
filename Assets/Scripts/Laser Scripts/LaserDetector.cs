@@ -6,7 +6,11 @@ public class LaserDetector : MonoBehaviour
 {
 
     public float acceptedWavelength;
+    public int activationCount;
+    public bool isActivated = false;
     public int level;
+    private int hitCount = 0;
+    private float time = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +24,26 @@ public class LaserDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        time += Time.deltaTime;
+
+        if (time > 0.05f) // might want to set a global variable (internal update rate) since same time is also used in Laser.cs
+        {
+            if (hitCount >= activationCount)
+            {
+                isActivated = true;
+            }
+            else
+            {
+                isActivated = false;
+            }
+
+            time = 0f;
+            hitCount = 0;
+        }
     }
 
     void HitByLaser()
     {
-        Debug.Log("HIT BY LASER!");
-        LevelManager.FinishLevel(level);
+        hitCount++;
     }
 }

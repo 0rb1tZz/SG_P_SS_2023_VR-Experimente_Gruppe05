@@ -57,10 +57,7 @@ public class LaserBeam
         string tag = hitInfo.collider.tag;
         if (tag == "Mirror")
         {
-            Vector3 position = hitInfo.point;
-            Vector3 direction = Vector3.Reflect(dir, hitInfo.normal);
-
-            CastRay(position, direction);
+            HandleMirror(hitInfo, dir);
         }
         else if (tag == "Lens")
         {
@@ -72,28 +69,11 @@ public class LaserBeam
         }
         else if (tag == "LaserDetector")
         {
-            LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
-            if (detector != null && detector.acceptedWavelength == this.laserWavenlength && (checkpoints == 0 || checkpointList.Count == checkpoints))
-            {
-                hitInfo.transform.SendMessage("HitByLaser");
-            }
-
-            laserIndices.Add(hitInfo.point);
-            UpdateLineRenderer();
+            HandleLaserDetector(hitInfo);
         }
         else if (tag == "LaserCheckpoint")
         {
-            GameObject checkpointObject = hitInfo.collider.gameObject.transform.parent.gameObject;
-            LaserCheckpoint checkpointScript = checkpointObject.GetComponent<LaserCheckpoint>();
-            if (checkpointScript != null && checkpointScript.acceptedWavelength == this.laserWavenlength)
-            {
-                checkpointObject.transform.SendMessage("HitByLaser");
-                if (!checkpointList.Contains(checkpointObject))
-                {
-                    checkpointList.Add(checkpointObject);
-                }
-            }
-            CastRay(hitInfo.point + dir.normalized * 0.01f, dir);
+            HandheldLaserCheckpoint(hitInfo, dir);
         }
         else
         {
@@ -102,23 +82,12 @@ public class LaserBeam
         }
     }
 
-    void UpdateLineRenderer()
+    void HandleMirror(RaycastHit hitInfo, Vector3 dir)
     {
-        int count = 0;
-        laser.positionCount = laserIndices.Count;
+        Vector3 position = hitInfo.point;
+        Vector3 direction = Vector3.Reflect(dir, hitInfo.normal);
 
-        foreach (Vector3 vector in laserIndices)
-        {
-            laser.SetPosition(count, vector);
-            count++;
-        }
-    }
-
-    public void UpdateLaser()
-    {
-        this.laserIndices.Clear();
-        this.checkpointList.Clear();
-        CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
+        CastRay(position, direction);
     }
 
     void HandleLens(RaycastHit hitInfo, Vector3 dir)
@@ -197,4 +166,51 @@ public class LaserBeam
         return refractedVector;
     }
 
+    void HandleLaserDetector(RaycastHit hitInfo)
+    {
+        LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
+
+        if (detector != null && detector.acceptedWavelength == this.laserWavenlength && (checkpoints == 0 || checkpointList.Count == checkpoints))
+        {
+            hitInfo.transform.SendMessage("HitByLaser");
+        }
+
+        laserIndices.Add(hitInfo.point);
+        UpdateLineRenderer();
+    }
+
+    void HandheldLaserCheckpoint(RaycastHit hitInfo, Vector3 dir)
+    {
+        GameObject checkpointObject = hitInfo.collider.gameObject.transform.parent.gameObject;
+        LaserCheckpoint checkpointScript = checkpointObject.GetComponent<LaserCheckpoint>();
+
+        if (checkpointScript != null && checkpointScript.acceptedWavelength == this.laserWavenlength)
+        {
+            checkpointObject.transform.SendMessage("HitByLaser");
+            if (!checkpointList.Contains(checkpointObject))
+            {
+                checkpointList.Add(checkpointObject);
+            }
+        }
+        CastRay(hitInfo.point + dir.normalized * 0.01f, dir);
+    }
+
+    void UpdateLineRenderer()
+    {
+        int count = 0;
+        laser.positionCount = laserIndices.Count;
+
+        foreach (Vector3 vector in laserIndices)
+        {
+            laser.SetPosition(count, vector);
+            count++;
+        }
+    }
+
+    public void UpdateLaser()
+    {
+        this.laserIndices.Clear();
+        this.checkpointList.Clear();
+        CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
+    }
 }

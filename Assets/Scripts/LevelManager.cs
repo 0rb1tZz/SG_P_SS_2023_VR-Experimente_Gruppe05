@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
     {
         if (door != null)
         {
-            door.SetActive(false);
+            door.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

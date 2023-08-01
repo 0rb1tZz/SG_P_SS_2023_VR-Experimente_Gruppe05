@@ -8,7 +8,6 @@ public class LaserDetector : MonoBehaviour
     public float acceptedWavelength;
     public int activationCount;
     public bool isActivated = false;
-    public int level;
     private int hitCount = 0;
     private float time = 0f;
 

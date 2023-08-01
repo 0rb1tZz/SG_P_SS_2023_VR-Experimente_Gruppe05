@@ -15383,6 +15383,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 520
   checkpoints: 1
+  detectorList: []
 --- !u!43 &1007118370
 Mesh:
   m_ObjectHideFlags: 0
@@ -17061,7 +17062,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30374
+  m_Name: pb_Mesh29048
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17266,6 +17267,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 650
   checkpoints: 0
+  detectorList: []
 --- !u!1001 &1152928742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19120,6 +19122,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 650
   checkpoints: 0
+  detectorList: []
 --- !u!1 &1267926617
 GameObject:
   m_ObjectHideFlags: 0
@@ -20888,6 +20891,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 640
   checkpoints: 2
+  detectorList: []
 --- !u!1 &1344213527
 GameObject:
   m_ObjectHideFlags: 0
@@ -22056,6 +22060,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 650
   checkpoints: 0
+  detectorList: []
 --- !u!1 &1524270193
 GameObject:
   m_ObjectHideFlags: 0
@@ -23337,6 +23342,7 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 5c219da55f3d0e14a9821d4a6f16f726, type: 2}
   laserWavelength: 650
   checkpoints: 0
+  detectorList: []
 --- !u!1 &1657259360
 GameObject:
   m_ObjectHideFlags: 0

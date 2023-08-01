@@ -31,7 +31,7 @@ public class LaserBeam
         this.laser.startColor = LaserHelperFunctions.RgbFromWavelength(wavelength);
         this.laser.endColor = LaserHelperFunctions.RgbFromWavelength(wavelength);
 
-        CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
+        //CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
     }
 
     void CastRay(Vector3 pos, Vector3 dir)

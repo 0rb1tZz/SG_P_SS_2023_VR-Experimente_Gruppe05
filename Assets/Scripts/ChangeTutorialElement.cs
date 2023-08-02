@@ -24,6 +24,10 @@ public class ChangeTutorialElement : MonoBehaviour
         }
         dropDown = this.transform.GetChild(3).GetComponent<TMP_Dropdown>();
         dropDown.AddOptions(optionList);
+        
+        if(tutorialList.Count != 0){
+            tutorialList[0].SetActive(true);
+        }
     }
 
     public void ChangeTutorialToIndex(int index){

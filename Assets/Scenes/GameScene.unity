@@ -26839,7 +26839,7 @@ GameObject:
   - component: {fileID: 1629241940}
   - component: {fileID: 1629241939}
   m_Layer: 0
-  m_Name: Game Menu
+  m_Name: GameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

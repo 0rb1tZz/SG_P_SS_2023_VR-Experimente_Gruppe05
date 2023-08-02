@@ -10,6 +10,7 @@ public class ChangeTutorialElement : MonoBehaviour
     private int currentIndex = 0;
     private GameObject currentTutorial;
     private float time = 0f;
+    private TMP_Dropdown dropDown;
 
     void Start(){
         Transform allTutorials = this.transform.GetChild(2);
@@ -21,7 +22,8 @@ public class ChangeTutorialElement : MonoBehaviour
         foreach(GameObject tut in tutorialList){
             optionList.Add(tut.name);
         }
-        this.transform.GetChild(3).GetComponent<TMP_Dropdown>().AddOptions(optionList);
+        dropDown = this.transform.GetChild(3).GetComponent<TMP_Dropdown>();
+        dropDown.AddOptions(optionList);
     }
 
     public void ChangeTutorialToIndex(int index){
@@ -36,6 +38,7 @@ public class ChangeTutorialElement : MonoBehaviour
         tutorialList[currentIndex].SetActive(false);
 
         currentIndex = (currentIndex + tutorialList.Count + changeValue) % tutorialList.Count;
+        dropDown.value = currentIndex;
 
         tutorialList[currentIndex].SetActive(true);
     }

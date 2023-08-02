@@ -7,6 +7,7 @@ public class SetTurnType : MonoBehaviour
 {
     public ActionBasedContinuousTurnProvider continuousTurn;
     public ActionBasedSnapTurnProvider snapTurn;
+    public GameObject tutorial;
 
     public void setTypeFromIndex(int index){
         if(index == 0){
@@ -16,5 +17,10 @@ public class SetTurnType : MonoBehaviour
             snapTurn.enabled = true;
             continuousTurn.enabled = false;
         }
+    }
+
+    public void OpenTutorial(){
+        this.gameObject.SetActive(false);
+        tutorial.SetActive(true);
     }
 }

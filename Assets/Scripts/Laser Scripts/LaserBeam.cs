@@ -73,7 +73,7 @@ public class LaserBeam
         }
         else if (tag == "LaserCheckpoint")
         {
-            HandheldLaserCheckpoint(hitInfo, dir);
+            HandleLaserCheckpoint(hitInfo, dir);
         }
         else
         {
@@ -179,7 +179,7 @@ public class LaserBeam
         UpdateLineRenderer();
     }
 
-    void HandheldLaserCheckpoint(RaycastHit hitInfo, Vector3 dir)
+    void HandleLaserCheckpoint(RaycastHit hitInfo, Vector3 dir)
     {
         GameObject checkpointObject = hitInfo.collider.gameObject.transform.parent.gameObject;
         LaserCheckpoint checkpointScript = checkpointObject.GetComponent<LaserCheckpoint>();

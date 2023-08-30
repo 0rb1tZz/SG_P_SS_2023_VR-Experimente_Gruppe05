@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
       propertyPath: m_Name
-      value: Konkave Linse Variant
+      value: Konkave Linse
       objectReference: {fileID: 0}
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
@@ -139,8 +139,7 @@ PrefabInstance:
       value: 'Konkave Linsen sind in der Lage Lichtstrahlen zu streuen.
 
         Als
-        Spieler ist man in der Lage mit Linsen zu interagieren und sie in der Spielwelt
-        zu bewegen.'
+        Spieler kann man mit Linsen interagieren und sie in der Spielwelt zu bewegen.'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37019c7a67da68c4c8a816d39d1d8b44, type: 3}

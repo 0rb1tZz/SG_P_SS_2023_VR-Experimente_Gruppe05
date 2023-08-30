@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
       propertyPath: m_Name
-      value: Konvexe Linse Variant
+      value: Konvexe Linse
       objectReference: {fileID: 0}
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
@@ -162,8 +162,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: "Konvexe Linsen sind in der Lage Lichtstrahlen in ihrem Brennpunkt zu
-        b\xFCndeln.\nAls Spieler ist man in der Lage mit Linsen zu interagieren und
-        sie in der Spielwelt zu bewegen."
+        b\xFCndeln.\nAls Spieler*in kann man mit Linsen interagieren und sie in der
+        Spielwelt zu bewegen."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37019c7a67da68c4c8a816d39d1d8b44, type: 3}

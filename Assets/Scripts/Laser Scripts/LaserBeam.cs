@@ -30,8 +30,6 @@ public class LaserBeam
         this.laser.material = material;
         this.laser.startColor = LaserHelperFunctions.RgbFromWavelength(wavelength);
         this.laser.endColor = LaserHelperFunctions.RgbFromWavelength(wavelength);
-
-        //CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
     }
 
     void CastRay(Vector3 pos, Vector3 dir)
@@ -40,8 +38,11 @@ public class LaserBeam
 
         Ray ray = new Ray(pos, dir);
         RaycastHit hit = new RaycastHit();
+        LayerMask layers = new LayerMask();
+        layers |= 1 << LayerMask.NameToLayer("Player");
+        layers |= 1 << LayerMask.NameToLayer("ItemBarrier");
 
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, ~layers))
         {
             CheckHit(hit, dir);
         }

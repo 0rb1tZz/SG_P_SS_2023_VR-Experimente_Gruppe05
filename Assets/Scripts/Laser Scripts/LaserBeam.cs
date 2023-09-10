@@ -11,14 +11,11 @@ public class LaserBeam
     List<Vector3> laserIndices = new List<Vector3>();
     GameObject parentObject;
     float laserWavenlength;
-    int checkpoints;
-    List<GameObject> checkpointList = new List<GameObject>();
 
-    public LaserBeam(GameObject parentObject, Material material, float wavelength, int checkpoints)
+    public LaserBeam(GameObject parentObject, Material material, float wavelength)
     {
         this.parentObject = parentObject;
         this.laserWavenlength = wavelength;
-        this.checkpoints = checkpoints;
 
         this.laser = new LineRenderer();
         this.laserObject = new GameObject();
@@ -171,7 +168,7 @@ public class LaserBeam
     {
         LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
 
-        if (detector != null && detector.acceptedWavelength == this.laserWavenlength && (checkpoints == 0 || checkpointList.Count == checkpoints))
+        if (detector != null && detector.acceptedWavelength == this.laserWavenlength)
         {
             hitInfo.transform.SendMessage("HitByLaser");
         }
@@ -188,10 +185,6 @@ public class LaserBeam
         if (checkpointScript != null && checkpointScript.acceptedWavelength == this.laserWavenlength)
         {
             checkpointObject.transform.SendMessage("HitByLaser");
-            if (!checkpointList.Contains(checkpointObject))
-            {
-                checkpointList.Add(checkpointObject);
-            }
         }
         CastRay(hitInfo.point + dir.normalized * 0.01f, dir);
     }
@@ -211,7 +204,6 @@ public class LaserBeam
     public void UpdateLaser()
     {
         this.laserIndices.Clear();
-        this.checkpointList.Clear();
         CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
     }
 }

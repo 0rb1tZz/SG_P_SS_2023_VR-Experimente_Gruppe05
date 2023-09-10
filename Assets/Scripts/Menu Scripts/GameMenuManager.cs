@@ -12,7 +12,7 @@ public class GameMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        menu.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * spawnDistance;
     }
 
     // Update is called once per frame

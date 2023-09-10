@@ -39,6 +39,7 @@ public class LevelManager : MonoBehaviour
         if (door != null)
         {
             door.transform.GetChild(0).gameObject.SetActive(false);
+            door.GetComponent<AudioSource>().Play();
         }
     }
 }

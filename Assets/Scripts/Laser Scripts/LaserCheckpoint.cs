@@ -7,7 +7,7 @@ using UnityEngine;
 public class LaserCheckpoint : MonoBehaviour
 {
 
-    public float acceptedWavelength;
+    public float acceptedWavelength = 0;
     public bool isActivated = false;
     private float time;
     private float resetTime = 0.1f;

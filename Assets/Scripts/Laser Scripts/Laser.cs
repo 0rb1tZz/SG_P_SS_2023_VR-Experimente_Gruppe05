@@ -7,7 +7,6 @@ public class Laser : MonoBehaviour
 
     public Material laserMaterial;
     public float laserWavelength;
-    public int checkpoints;
     LaserBeam beam;
     public GameObject[] detectorList;
     private bool isActivated = false;

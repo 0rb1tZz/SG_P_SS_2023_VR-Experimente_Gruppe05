@@ -204,6 +204,6 @@ public class LaserBeam
     public void UpdateLaser()
     {
         this.laserIndices.Clear();
-        CastRay(this.parentObject.transform.position, this.parentObject.transform.forward);
+        CastRay(this.parentObject.transform.position, -this.parentObject.transform.right);
     }
 }

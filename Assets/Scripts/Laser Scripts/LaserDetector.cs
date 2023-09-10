@@ -20,6 +20,11 @@ public class LaserDetector : MonoBehaviour
 
         Material material = gameObject.GetComponent<Renderer>().material;
         material.color = color;
+
+        foreach (GameObject checkpoint in checkpointList)
+            {
+                checkpoint.GetComponent<LaserCheckpoint>().acceptedWavelength = this.acceptedWavelength;
+            }
     }
 
     // Update is called once per frame

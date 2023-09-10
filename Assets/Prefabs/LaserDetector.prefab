@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9122283fdc9a7b146b02f8806fe08fd5, type: 2}
+  - {fileID: 2100000, guid: d2f2a26625c47fc4db640e17da19c727, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,4 +113,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceptedWavelength: 650
   activationCount: 1
+  checkpointList: []
   isActivated: 0

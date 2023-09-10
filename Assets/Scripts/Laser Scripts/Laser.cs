@@ -7,7 +7,6 @@ public class Laser : MonoBehaviour
 
     public Material laserMaterial;
     public float laserWavelength;
-    public int checkpoints;
     LaserBeam beam;
     public GameObject[] detectorList;
     private bool isActivated = false;
@@ -17,7 +16,7 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        beam = new LaserBeam(gameObject, laserMaterial, laserWavelength, checkpoints);
+        beam = new LaserBeam(gameObject, laserMaterial, laserWavelength);
     }
 
     // Update is called once per frame

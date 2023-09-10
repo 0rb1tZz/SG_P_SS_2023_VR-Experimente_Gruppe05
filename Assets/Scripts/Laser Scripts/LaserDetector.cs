@@ -7,9 +7,11 @@ public class LaserDetector : MonoBehaviour
 
     public float acceptedWavelength;
     public int activationCount;
+    public GameObject[] checkpointList;
     public bool isActivated = false;
     private int hitCount = 0;
     private float time = 0f;
+    private float resetTime = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,11 @@ public class LaserDetector : MonoBehaviour
 
         Material material = gameObject.GetComponent<Renderer>().material;
         material.color = color;
+
+        foreach (GameObject checkpoint in checkpointList)
+            {
+                checkpoint.GetComponent<LaserCheckpoint>().acceptedWavelength = this.acceptedWavelength;
+            }
     }
 
     // Update is called once per frame
@@ -25,9 +32,17 @@ public class LaserDetector : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (time > 0.05f) // might want to set a global variable (internal update rate) since same time is also used in Laser.cs
+        if (time > resetTime) // might want to set a global variable (internal update rate) since same time is also used in Laser.cs
         {
-            if (hitCount >= activationCount)
+
+            bool allCheckpointsActive = true;
+
+            foreach (GameObject checkpoint in checkpointList)
+            {
+                allCheckpointsActive = allCheckpointsActive && checkpoint.GetComponent<LaserCheckpoint>().isActivated;
+            }
+            
+            if (hitCount >= activationCount && allCheckpointsActive)
             {
                 isActivated = true;
             }

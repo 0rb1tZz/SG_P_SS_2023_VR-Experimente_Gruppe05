@@ -9,6 +9,8 @@ public class LaserDetector : MonoBehaviour
     public int activationCount;
     public GameObject[] checkpointList;
     public bool isActivated = false;
+    public GameObject hitCounterText;
+    private HitCounter hitCounterTextScript;
     private int hitCount = 0;
     private float time = 0f;
     private float resetTime = 0.05f;
@@ -22,9 +24,15 @@ public class LaserDetector : MonoBehaviour
         material.color = color;
 
         foreach (GameObject checkpoint in checkpointList)
-            {
-                checkpoint.GetComponent<LaserCheckpoint>().acceptedWavelength = this.acceptedWavelength;
-            }
+        {
+            checkpoint.GetComponent<LaserCheckpoint>().acceptedWavelength = this.acceptedWavelength;
+        }
+
+        if(hitCounterText != null)
+        {
+            hitCounterTextScript = hitCounterText.GetComponent<HitCounter>();
+        }
+        
     }
 
     // Update is called once per frame
@@ -49,6 +57,10 @@ public class LaserDetector : MonoBehaviour
             else
             {
                 isActivated = false;
+            }
+
+            if(hitCounterText != null){
+                hitCounterTextScript.SetText(hitCount + "/" + activationCount);
             }
 
             time = 0f;

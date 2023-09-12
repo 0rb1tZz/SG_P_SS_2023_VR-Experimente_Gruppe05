@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// A script to handle the behavior of a laser beam
+/// </summary>
 public class LaserBeam
 {
+    GameObject laserObject; // An object containing the line renderer
+    LineRenderer laser; // The line renderer to render the laser beam
+    List<Vector3> laserIndices = new List<Vector3>(); // A list of points, being the path of the laser beam
+    GameObject parentObject; // The laser source, the laser beam originates from
+    float laserWavenlength; // The wavelength of the laser beam
 
-    GameObject laserObject;
-    LineRenderer laser;
-    List<Vector3> laserIndices = new List<Vector3>();
-    GameObject parentObject;
-    float laserWavenlength;
-
+    /// <summary>
+    /// The constructor of the laser beam class, instantiating all relevant variables
+    /// </summary>
+    /// <param name="parentObject">The laser source, the beam originates from</param>
+    /// <param name="material">The material of the laser beam</param>
+    /// <param name="wavelength">The wavelenght of the laser, indicating the color of the laser beam</param>
     public LaserBeam(GameObject parentObject, Material material, float wavelength)
     {
         this.parentObject = parentObject;
@@ -29,6 +37,11 @@ public class LaserBeam
         this.laser.endColor = LaserHelperFunctions.RgbFromWavelength(wavelength);
     }
 
+    /// <summary>
+    /// The function casts the laser beam from a given point to a given direction
+    /// </summary>
+    /// <param name="pos">The position from which the beam is cast</param>
+    /// <param name="dir">The direction of the beam</param>
     void CastRay(Vector3 pos, Vector3 dir)
     {
         laserIndices.Add(pos);
@@ -50,6 +63,11 @@ public class LaserBeam
         }
     }
 
+    /// <summary>
+    /// Handles the case of the laser beam hitting an object, handling each relevant object seperatly
+    /// </summary>
+    /// <param name="hitInfo">Information about the hit of the beam of an object</param>
+    /// <param name="dir">The direction from which the laser hits the object</param>
     void CheckHit(RaycastHit hitInfo, Vector3 dir)
     {
         string tag = hitInfo.collider.tag;
@@ -60,10 +78,6 @@ public class LaserBeam
         else if (tag == "Lens")
         {
             HandleLens(hitInfo, dir);
-        }
-        else if (tag == "Prism")
-        {
-            HandlePrism(hitInfo, dir);
         }
         else if (tag == "LaserDetector")
         {
@@ -80,6 +94,11 @@ public class LaserBeam
         }
     }
 
+    /// <summary>
+    /// Reflects the laser if it hits a mirror object in a physically correct way
+    /// </summary>
+    /// <param name="hitInfo">Information about the hit of the beam of an object</param>
+    /// <param name="dir">The direction from which the laser hits the object</param>
     void HandleMirror(RaycastHit hitInfo, Vector3 dir)
     {
         Vector3 position = hitInfo.point;
@@ -88,6 +107,11 @@ public class LaserBeam
         CastRay(position, direction);
     }
 
+    /// <summary>
+    /// Refracts the laser if it hits a lens object in a physically correct way
+    /// </summary>
+    /// <param name="hitInfo">Information about the hit of the beam of an object</param>
+    /// <param name="dir">The direction from which the laser hits the object</param>
     void HandleLens(RaycastHit hitInfo, Vector3 dir)
     {
         laserIndices.Add(hitInfo.point);
@@ -132,6 +156,7 @@ public class LaserBeam
         CastRay(hitInfo.point + newDirection * 0.05f, newDirection);
     }
 
+    /*
     void HandlePrism(RaycastHit hitInfo, Vector3 dir)
     {
         float n1 = 1.000293f;
@@ -163,7 +188,13 @@ public class LaserBeam
 
         return refractedVector;
     }
+    */
 
+    /// <summary>
+    /// Handles the activation af a detector
+    /// Informs a detector if a laser with the correct wavelength did hit it
+    /// </summary>
+    /// <param name="hitInfo">Information about the hit of the beam of an object</param>
     void HandleLaserDetector(RaycastHit hitInfo)
     {
         LaserDetector detector = hitInfo.collider.gameObject.GetComponent<LaserDetector>();
@@ -177,6 +208,12 @@ public class LaserBeam
         UpdateLineRenderer();
     }
 
+    /// <summary>
+    /// Handles the activation af a checkpoint
+    /// Informs a checkpoint if a laser with the correct wavelength did hit it
+    /// </summary>
+    /// <param name="hitInfo">Information about the hit of the beam of an object</param>
+    /// <param name="dir">The direction from which the laser hits the object</param>
     void HandleLaserCheckpoint(RaycastHit hitInfo, Vector3 dir)
     {
         GameObject checkpointObject = hitInfo.collider.gameObject.transform.parent.gameObject;
@@ -189,6 +226,9 @@ public class LaserBeam
         CastRay(hitInfo.point + dir.normalized * 0.01f, dir);
     }
 
+    /// <summary>
+    /// Redraws the laser by updating the line renderer
+    /// </summary>
     void UpdateLineRenderer()
     {
         int count = 0;
@@ -201,6 +241,9 @@ public class LaserBeam
         }
     }
 
+    /// <summary>
+    /// The function recalculates the path of the laser beam
+    /// </summary>
     public void UpdateLaser()
     {
         this.laserIndices.Clear();

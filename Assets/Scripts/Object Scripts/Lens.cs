@@ -1,10 +1,10 @@
 using UnityEngine;
 
-/*
-A script to assign Lenses its properties.
-*/
+/// <summary>
+/// A script attached to a lens, to store some values
+/// </summary>
 public class Lens : MonoBehaviour
 {
-    public float focalLength;
-    public bool isConvex;
+    public float focalLength; // The focal length of the lens
+    public bool isConvex; // True, if the lens is convex
 }

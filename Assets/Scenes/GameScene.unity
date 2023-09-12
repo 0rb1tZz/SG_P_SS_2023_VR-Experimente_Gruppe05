@@ -16399,14 +16399,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1650232256}
-        m_TargetAssemblyTypeName: SetTurnType, Assembly-CSharp
+      - m_Target: {fileID: 1863776977}
+        m_TargetAssemblyTypeName: GameMenuManager, Assembly-CSharp
         m_MethodName: OpenTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1863776979}
+        m_TargetAssemblyTypeName: GameMenuManager, Assembly-CSharp
+        m_MethodName: OpenTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -16908,6 +16920,52 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &285538757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285538758}
+  - component: {fileID: 285538759}
+  m_Layer: 0
+  m_Name: Level8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285538758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285538757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839413191}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285538759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285538757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475fe2a0b55b9da469b0f26f327ba4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  detectorList: []
 --- !u!1 &293123931
 GameObject:
   m_ObjectHideFlags: 0
@@ -42315,7 +42373,7 @@ Transform:
   - {fileID: 243298455}
   - {fileID: 30047491}
   m_Father: {fileID: 1839413191}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1025098967
 Mesh:
@@ -43364,7 +43422,7 @@ Transform:
   - {fileID: 1116571206}
   - {fileID: 1807392915}
   m_Father: {fileID: 1839413191}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1088202517
 Mesh:
@@ -53053,8 +53111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
-  detectorList:
-  - {fileID: 0}
+  detectorList: []
 --- !u!1001 &1386817169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55870,7 +55927,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28468
+  m_Name: pb_Mesh28464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -58908,7 +58965,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continuousTurn: {fileID: 258407222}
   snapTurn: {fileID: 258407219}
-  tutorial: {fileID: 2076698404}
 --- !u!114 &1650232257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60692,7 +60748,7 @@ MonoBehaviour:
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1815356998}
+      - m_Target: {fileID: 1761554371}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -60707,7 +60763,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1815356998}
+      - m_Target: {fileID: 1761554371}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -62436,18 +62492,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3278edfcf9da075468a541cb0d14e174, type: 3}
---- !u!114 &1815356998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -9162316055889706128, guid: f69368ad3fcb318489e8d8f575b09ac9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7695043348387658108}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1830582072
 Mesh:
   m_ObjectHideFlags: 0
@@ -63093,6 +63137,8 @@ Transform:
   - {fileID: 679165498}
   - {fileID: 695120511}
   - {fileID: 1384534194}
+  - {fileID: 285538758}
+  - {fileID: 1951592370}
   - {fileID: 1022703565}
   - {fileID: 1080354296}
   m_Father: {fileID: 0}
@@ -63563,6 +63609,8 @@ MonoBehaviour:
       type: 3}
   head: {fileID: 1555850927}
   spawnDistance: 2
+  tutorial: {fileID: 2076698404}
+  mainMenu: {fileID: 1650232255}
 --- !u!4 &1863776978
 Transform:
   m_ObjectHideFlags: 0
@@ -63607,6 +63655,8 @@ MonoBehaviour:
       type: 3}
   head: {fileID: 1555850927}
   spawnDistance: 2
+  tutorial: {fileID: 2076698404}
+  mainMenu: {fileID: 1650232255}
 --- !u!1 &1868888709 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3046302473198771501, guid: 3278edfcf9da075468a541cb0d14e174,
@@ -68105,6 +68155,52 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1951592369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951592370}
+  - component: {fileID: 1951592371}
+  m_Layer: 0
+  m_Name: Level9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1951592370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951592369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839413191}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1951592371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951592369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475fe2a0b55b9da469b0f26f327ba4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  detectorList: []
 --- !u!1001 &1962159465
 PrefabInstance:
   m_ObjectHideFlags: 0

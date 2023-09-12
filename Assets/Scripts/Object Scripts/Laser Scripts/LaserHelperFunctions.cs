@@ -1,10 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// A script to translate a given wavelength to a color
+/// </summary>
 public class LaserHelperFunctions
 {
     /*
      * https://stackoverflow.com/questions/1472514/convert-light-frequency-to-rgb
      */
+
+    /// <summary>
+    /// The function receives a wavelength and returns a corresponding color
+    /// </summary>
+    /// <param name="wavelength">The wavelength to convert into a color</param>
+    /// <returns>The color based on the wavelength</returns>
     public static Color RgbFromWavelength(float wavelength)
     {
 

@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+A script to assign Lenses its properties.
+*/
 public class Lens : MonoBehaviour
 {
     public float focalLength;

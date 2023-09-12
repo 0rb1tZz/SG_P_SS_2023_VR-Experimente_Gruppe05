@@ -256,7 +256,7 @@ PrefabInstance:
         werden.\nEs gibt auch Detektoren, die zur Aktivierung mehrere Laserstrahlen
         ben\xF6tigen.\nDie Farbe des Detektors zeigt hierbei an, dass dieser durch
         einen gleichfarbigen Laser aktiviert werden kann.\nDie Aktivierung eines
-        Detektors kann unterschiedliche Ereignisse ausl\xF6sen, z.B. das \xF6ffnen
+        Detektors kann unterschiedliche Ereignisse ausl\xF6sen, z.B. das \xD6ffnen
         einer T\xFCr."
       objectReference: {fileID: 0}
     m_RemovedComponents: []

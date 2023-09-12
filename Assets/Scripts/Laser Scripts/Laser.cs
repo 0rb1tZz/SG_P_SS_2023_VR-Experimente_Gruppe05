@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/*
+A script to spawn and update a laser beam from a laser source
+Also handles the activation status of the laser source.
+*/
 public class Laser : MonoBehaviour
 {
 

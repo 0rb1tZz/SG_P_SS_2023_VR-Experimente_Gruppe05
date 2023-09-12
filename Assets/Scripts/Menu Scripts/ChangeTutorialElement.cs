@@ -1,8 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*
+A script to switch between different tutorial elements.
+*/
 public class ChangeTutorialElement : MonoBehaviour
 {
     public GameObject menu;

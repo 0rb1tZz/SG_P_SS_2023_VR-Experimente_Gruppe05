@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+A script to always spawn the menu in front of the player at a certain distance.
+*/
 public class GameMenuManager : MonoBehaviour
 {
     public GameObject menu;
@@ -13,6 +14,7 @@ public class GameMenuManager : MonoBehaviour
     void Start()
     {
         menu.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * spawnDistance;
+        AudioListener.volume = 0.5f; // default Volume matching the Volume Slider, being on 0.5
     }
 
     // Update is called once per frame

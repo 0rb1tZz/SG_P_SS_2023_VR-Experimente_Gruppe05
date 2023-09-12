@@ -136,11 +136,11 @@ PrefabInstance:
     - target: {fileID: 5995828203478820216, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
       propertyPath: m_text
-      value: "Ein Checkpoint ist einem Detektor zugeordnet und alle Checkpoints eines
-        Detektors m\xFCssen eingesammelt werden, bevor der Detektor aktiviert werden
-        kann.\nDie Basis eines Checkpoints gibt durch seine Farbe an, von welchem
-        Laser er aktiviert werden muss. Die Aktivierung zeigt sich w\xE4hrend des
-        Spielens durch Ver\xE4nderung der Glasfarbe."
+      value: "Checkpoints sind einem gleichfarbigen Detektor zugeordnet. Alle Checkpoints
+        eines Detektors m\xFCssen eingesammelt werden, damit der Detektor aktiviert
+        werden kann.\nDie Basis eines Checkpoints gibt durch seine Farbe an, von
+        welchem Laser er aktiviert werden muss. Die Aktivierung zeigt sich w\xE4hrend
+        des Spielens durch Ver\xE4nderung der Glasfarbe."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37019c7a67da68c4c8a816d39d1d8b44, type: 3}

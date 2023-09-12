@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class HitCounter : MonoBehaviour
-{
-    
+{  
     public Transform head;
 
     // Start is called before the first frame update
@@ -21,6 +18,9 @@ public class HitCounter : MonoBehaviour
         gameObject.transform.forward *= -1;
     }
 
+    /*
+    Sets the text of the HitCounter object.
+    */
     public void SetText(string textToSet){
         gameObject.GetComponent<TextMeshPro>().text = textToSet;
     }

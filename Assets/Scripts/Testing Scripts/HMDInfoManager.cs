@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -15,11 +13,5 @@ public class HMDInfoManager : MonoBehaviour
         } else{
             Debug.Log("Using " + XRSettings.loadedDeviceName);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

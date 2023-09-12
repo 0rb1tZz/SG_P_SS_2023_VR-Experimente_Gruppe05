@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
       propertyPath: m_Name
-      value: Barriere Variant
+      value: Barriere
       objectReference: {fileID: 0}
     - target: {fileID: 870864269576319454, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
@@ -146,11 +146,9 @@ PrefabInstance:
     - target: {fileID: 5995828203478820216, guid: 37019c7a67da68c4c8a816d39d1d8b44,
         type: 3}
       propertyPath: m_text
-      value: 'Eine Barriere kann zwischen zwei Leveln aber auch einfach so existieren.
-
-        Der
-        Spieler kann sie einfach durchschreiten, allerdings verhindert sie die Mitnahme
-        von Objekten in den dahinterliegenden Berich.'
+      value: "Eine Barriere trennt zwei Level von einander. Allerdings k\xF6nnen
+        sie auch einfach so existieren.\nSpielende k\xF6nnen sie einfach durchschreiten,
+        Objekte k\xF6nnen nicht hindurch."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37019c7a67da68c4c8a816d39d1d8b44, type: 3}

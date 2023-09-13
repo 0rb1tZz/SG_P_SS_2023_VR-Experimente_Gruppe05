@@ -71,7 +71,7 @@ public class LaserDetector : MonoBehaviour
             if(hitCounterText != null){
                 if (isActivated)
                 {
-                    hitCounterTextScript.SetText("\u10003");
+                    hitCounterTextScript.SetText("OK");
                 }
                 else
                 {

@@ -150,5 +150,10 @@ PrefabInstance:
         sie auch einfach so existieren.\nSpielende k\xF6nnen sie einfach durchschreiten,
         Objekte k\xF6nnen nicht hindurch."
       objectReference: {fileID: 0}
+    - target: {fileID: 8749109165328870611, guid: 37019c7a67da68c4c8a816d39d1d8b44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37019c7a67da68c4c8a816d39d1d8b44, type: 3}

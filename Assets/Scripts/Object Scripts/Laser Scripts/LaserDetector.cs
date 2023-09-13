@@ -69,7 +69,14 @@ public class LaserDetector : MonoBehaviour
             }
 
             if(hitCounterText != null){
-                hitCounterTextScript.SetText(hitCount + "/" + activationCount);
+                if (isActivated)
+                {
+                    hitCounterTextScript.SetText("\u10003");
+                }
+                else
+                {
+                    hitCounterTextScript.SetText(hitCount + "/" + activationCount);
+                }
             }
 
             time = 0f;

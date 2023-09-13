@@ -24,7 +24,7 @@ public class LaserHelperFunctions
         {
             red = -(wavelength - 440) / (440 - 380);
             green = 0f;
-            blue = 0f;
+            blue = 1f;
         }
         else if (wavelength >= 440 && wavelength < 490)
         {

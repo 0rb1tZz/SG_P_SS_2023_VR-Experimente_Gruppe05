@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class HitCounter : MonoBehaviour
 {
-    public Transform head; // The position the panel will be angled to
+    private Transform head; // The position the panel will be angled to
 
     /// <summary>
     /// At the start, setting the main camera as the head
